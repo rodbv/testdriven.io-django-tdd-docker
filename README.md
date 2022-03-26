@@ -18,6 +18,8 @@ Once the services are up and running you can execute the usual Django commands a
 > docker-compose exec movies python manage.py createsuperuser
 ```
 
+## Running the tests
+
 To run the tests, type
 
 ```bash
@@ -25,7 +27,39 @@ docker-compose exec movies pytest
 ```
 
 Where "movies" is the main application service (check [docker-compose.yml](./docker-compose.yml)).
+
 PyTest-watch is also supported with the `ptw` command.
+
+Other useful pytest commands:
+
+```
+# normal run
+docker-compose exec movies pytest
+
+# disable warnings
+docker-compose exec movies pytest -p no:warnings
+
+# run only the last failed tests
+docker-compose exec movies pytest --lf
+
+# run only the tests with names that match the string expression
+docker-compose exec movies pytest -k "movie and not all_movies"
+
+# stop the test session after the first failure
+docker-compose exec movies pytest -x
+
+# enter PDB after first failure then end the test session
+docker-compose exec movies pytest -x --pdb
+
+# stop the test run after two failures
+docker-compose exec movies pytest --maxfail=2
+
+# show local variables in tracebacks
+docker-compose exec movies pytest -l
+
+# list the 2 slowest tests
+docker-compose exec movies pytest --durations=2
+```
 
 ## API
 
@@ -36,3 +70,10 @@ The API made available by the app is
 | GET         | READ        | get all movies     |
 | GET         | READ        | get a single movie |
 | POST        | CREATE      | add a movie        |
+
+## Seeding the database with file movies.json
+
+```
+docker-compose exec movies python manage.py flush
+docker-compose exec movies python manage.py loaddata movies.json
+```
