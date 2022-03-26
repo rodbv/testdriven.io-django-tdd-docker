@@ -24,7 +24,8 @@ To run the tests, type
 docker-compose exec movies pytest
 ```
 
-...where "movies" is the main application service (check [docker-compose.yml](./docker-compose.yml))
+Where "movies" is the main application service (check [docker-compose.yml](./docker-compose.yml)).
+`pytest-watch` is also supported with the `ptw` command.
 
 ## API
 
