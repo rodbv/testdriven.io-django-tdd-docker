@@ -25,7 +25,7 @@ docker-compose exec movies pytest
 ```
 
 Where "movies" is the main application service (check [docker-compose.yml](./docker-compose.yml)).
-`pytest-watch` is also supported with the `ptw` command.
+PyTest-watch is also supported with the `ptw` command.
 
 ## API
 
