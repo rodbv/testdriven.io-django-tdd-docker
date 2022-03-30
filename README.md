@@ -10,13 +10,17 @@ To run it, simply execute from the `movies` directory
 docker-compose up
 ```
 
-Once the services are up and running you can execute the usual Django commands as such:
+Once the services are up and running you can execute the usual Django commands inside the containers as such:
 
 ```
 > docker-compose exec movies python manage.py makemigrations
 > docker-compose exec movies python manage.py migrate
 > docker-compose exec movies python manage.py createsuperuser
 ```
+
+## Heroku deployment
+
+This application has been deployed on Heroku (via Gitlab CI) and is accessible at (https://morning-river-10989.herokuapp.com)[https://morning-river-10989.herokuapp.com]
 
 ## Running the tests
 

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,6 +83,9 @@ DATABASES = {
     }
 }
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
+DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,3 +134,8 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+
+if not DEBUG:
+    REST_FRAMEWORK = {
+        "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)
+    }
